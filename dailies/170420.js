@@ -24,7 +24,7 @@ var w,
     h,
     imageData;
 
-bitlib.imageData("boyhowdy.jpg", function(id) {
+bitlib.imageData("logo-sensorium-black.jpg", function(id) {
     imageData = id;
     w = imageData.width;
     h = imageData.height;
