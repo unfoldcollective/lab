@@ -19,32 +19,38 @@ var context = bitlib.context(0, 0),
     width = context.width,
     height = context.height;
 
-
 var wave = 0.03,
     phase = 0,
     speed = -0.08,
     maxScale = 5,
-    count = 1000,
+    count = 700,
     distrib = 5,
     hue = 0;
 
-panel
-    .addRange("wave", 0.001, 0.15, wave, 0.001, function(value) {
-        wave = value;
-    })
-    .addRange("speed", -0.5, 0.5, speed, 0.01, function(value) {
-        speed = value;
-    })
-    .addRange("max scale", 0.25, 30, maxScale, 0.01, function(value) {
-        maxScale = value;
-    })
-    .addRange("count", 100, 2000, count, 1, function(value) {
-        count = value;
-    })
-    .addRange("distrib", 1, 20, distrib, 1, function(value) {
-        distrib = value;
-    })
+document.getElementById("wave").value     = wave;
+document.getElementById("speed").value    = speed;
+document.getElementById("maxScale").value = maxScale;
+document.getElementById("count").value    = count;
+document.getElementById("distrib").value  = distrib;
 
+// panel
+//     .addRange("wave", 0.001, 0.15, wave, 0.001, function(value) {
+//         wave = value;
+//     })
+//     .addRange("speed", -0.5, 0.5, speed, 0.01, function(value) {
+//         speed = value;
+//     })
+//     .addRange("max scale", 0.25, 30, maxScale, 0.01, function(value) {
+//         maxScale = value;
+//     })
+//     .addRange("count", 100, 1000, count, 1, function(value) {
+//         count = value;
+//     })
+//     .addRange("distrib", 1, 20, distrib, 1, function(value) {
+//         distrib = value;
+//     })
+
+panel.hide();
 
 
 bitlib.anim(update).start();
