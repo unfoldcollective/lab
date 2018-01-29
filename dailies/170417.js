@@ -25,6 +25,12 @@ var scale = 0.01,
     maxScale = 10,
     count = 1000,
     hue = 0,
+    saturation = 1,
+    lightness = 0.5,
+    bg_hue = 0,
+    bg_saturation = 0.7,
+    bg_lightness = 1,
+    bg_transparent = false,
     z = 0;
 
 panel
@@ -40,6 +46,28 @@ panel
     .addRange("count", 100, 2000, count, 1, function(value) {
         count = value;
     })
+    .addRange("hue", 0, 360, hue, 1, function(value) {
+        hue = value;
+    })
+    .addRange("saturation", 0, 1, saturation, 0.01, function(value) {
+        saturation = value;
+    })
+    .addRange("lightness", 0, 1, lightness, 0.01, function(value) {
+        lightness = value;
+    })
+    .addRange("bg_hue", 0, 360, bg_hue, 1, function(value) {
+        bg_hue = value;
+    })
+    .addRange("bg_saturation", 0, 1, bg_saturation, 0.01, function(value) {
+        bg_saturation = value;
+    })
+    .addRange("bg_lightness", 0, 1, bg_lightness, 0.01, function(value) {
+        bg_lightness = value;
+    })
+    .addBoolean("transparent bg", bg_transparent, function(value) {
+        bg_transparent = value;
+    })
+
 
 
 
@@ -48,12 +76,17 @@ bitlib.anim(update).start();
 function update() {
     bitlib.random.seed(0);
     context.save();
-    context.clear();
+    if (bg_transparent) {
+        context.clear();
+    }
+    else {
+        context.clear(bitlib.color.hsv(bg_hue, bg_saturation, bg_lightness));
+    }    
     context.globalCompositeOperation = "lighten";
 
     var gradient = context.createLinearGradient(0, -5, 0, 5);
     gradient.addColorStop(0, "#ffffff");
-    gradient.addColorStop(1, bitlib.color.hsv(hue++, 1, 0.5));
+    gradient.addColorStop(1, bitlib.color.hsv(hue, saturation, lightness));
     context.fillStyle = gradient;
 
     for(var i = 0; i < count; i++) {
