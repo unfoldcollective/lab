@@ -48,7 +48,7 @@ bitlib.anim(update).start();
 function update() {
     bitlib.random.seed(0);
     context.save();
-    context.clear("transparent");
+    context.clear();
     context.globalCompositeOperation = "lighten";
 
     var gradient = context.createLinearGradient(0, -5, 0, 5);
