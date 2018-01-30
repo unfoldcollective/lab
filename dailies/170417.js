@@ -24,6 +24,7 @@ var scale = 0.01,
     speed = 0.03,
     maxScale = 10,
     count = 1000,
+    hue_shift = 10,
     hue = 0,
     saturation = 1,
     lightness = 0.5,
@@ -45,6 +46,9 @@ panel
     })
     .addRange("count", 100, 2000, count, 1, function(value) {
         count = value;
+    })
+    .addRange("hue_shift", 0, 100, hue_shift, 1, function(value) {
+        hue_shift = value;
     })
     .addRange("hue", 0, 360, hue, 1, function(value) {
         hue = value;
@@ -84,11 +88,6 @@ function update() {
     }    
     context.globalCompositeOperation = "lighten";
 
-    var gradient = context.createLinearGradient(0, -5, 0, 5);
-    gradient.addColorStop(0, "#ffffff");
-    gradient.addColorStop(1, bitlib.color.hsv(hue, saturation, lightness));
-    context.fillStyle = gradient;
-
     for(var i = 0; i < count; i++) {
         draw();
     }
@@ -104,6 +103,12 @@ function draw() {
         x = width / 2 + Math.cos(a) * r,
         y = height / 2 + Math.sin(a) * r,
         s = bitlib.math.map(noise.perlin3(x * scale, y * scale, z), -1, 1, 0, maxScale);
+
+    var gradient = context.createLinearGradient(0, -5, 0, 5);
+    gradient.addColorStop(0, "#ffffff");
+    gradient.addColorStop(1, bitlib.color.hsv(hue + (s * hue_shift), saturation, lightness));
+    context.fillStyle = gradient;
+
     context.save();
     context.translate(x, y);
     context.rotate(bitlib.random.float(-0.75, -0.25));
