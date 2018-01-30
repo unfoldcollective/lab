@@ -24,8 +24,8 @@ var scale = 0.01,
     speed = 0.03,
     max_scale = 10,
     count = 500,
-    hue = 0,
     hue_shift = 50,
+    hue = 0,
     saturation = 1,
     lightness = 0.5,
     bg_hue = 0,
@@ -58,17 +58,17 @@ document.getElementById("count").step          = 1.0;
 document.getElementById("count").value         = count;
 function set_count(value) { count = parseFloat(value); }
 
-document.getElementById("hue").min             = 0.0;
-document.getElementById("hue").max             = 360.0;
-document.getElementById("hue").step            = 1.0;
-document.getElementById("hue").value           = hue;
-function set_hue(value) { hue = parseFloat(value); }
-
 document.getElementById("hue_shift").min             = 0.0;
 document.getElementById("hue_shift").max             = 100.0;
 document.getElementById("hue_shift").step            = 1.0;
 document.getElementById("hue_shift").value           = hue_shift;
 function set_hue_shift(value) { hue_shift = parseFloat(value); }
+
+document.getElementById("hue").min             = 0.0;
+document.getElementById("hue").max             = 360.0;
+document.getElementById("hue").step            = 1.0;
+document.getElementById("hue").value           = hue;
+function set_hue(value) { hue = parseFloat(value); }
 
 document.getElementById("saturation").min      = 0.0;
 document.getElementById("saturation").max      = 1.0;
