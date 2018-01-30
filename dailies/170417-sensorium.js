@@ -23,8 +23,9 @@ var context = bitlib.context(0, 0),
 var scale = 0.01,
     speed = 0.03,
     max_scale = 10,
-    count = 1000,
+    count = 500,
     hue = 0,
+    hue_shift = 50,
     saturation = 1,
     lightness = 0.5,
     bg_hue = 0,
@@ -51,8 +52,8 @@ document.getElementById("max_scale").step      = 0.01;
 document.getElementById("max_scale").value     = max_scale;
 function set_max_scale(value) { max_scale = parseFloat(value); }
 
-document.getElementById("count").min           = 100,
-document.getElementById("count").max           = 2000.0;
+document.getElementById("count").min           = 1.0,
+document.getElementById("count").max           = 1000.0;
 document.getElementById("count").step          = 1.0;
 document.getElementById("count").value         = count;
 function set_count(value) { count = parseFloat(value); }
@@ -62,6 +63,12 @@ document.getElementById("hue").max             = 360.0;
 document.getElementById("hue").step            = 1.0;
 document.getElementById("hue").value           = hue;
 function set_hue(value) { hue = parseFloat(value); }
+
+document.getElementById("hue_shift").min             = 0.0;
+document.getElementById("hue_shift").max             = 100.0;
+document.getElementById("hue_shift").step            = 1.0;
+document.getElementById("hue_shift").value           = hue_shift;
+function set_hue_shift(value) { hue_shift = parseFloat(value); }
 
 document.getElementById("saturation").min      = 0.0;
 document.getElementById("saturation").max      = 1.0;
@@ -113,10 +120,7 @@ function update() {
     }    
     context.globalCompositeOperation = "lighten";
 
-    var gradient = context.createLinearGradient(0, -5, 0, 5);
-    gradient.addColorStop(0, "#ffffff");
-    gradient.addColorStop(1, bitlib.color.hsv(hue, saturation, lightness));
-    context.fillStyle = gradient;
+    
 
     for(var i = 0; i < count; i++) {
         draw();
@@ -132,7 +136,13 @@ function draw() {
         a = bitlib.random.float(Math.PI * 2),
         x = width / 2 + Math.cos(a) * r,
         y = height / 2 + Math.sin(a) * r,
-        s = bitlib.math.map(noise.perlin3(x * scale, y * scale, z), -1, 1, 0, max_scale);
+        s   = bitlib.math.map(noise.perlin3(x * scale, y * scale, z), -1, 1, 0, max_scale);
+
+    var gradient = context.createLinearGradient(0, -5, 0, 5);
+    gradient.addColorStop(0, "#ffffff");
+    gradient.addColorStop(1, bitlib.color.hsv(hue + (s * hue_shift), saturation, lightness));
+    context.fillStyle = gradient;
+
     context.save();
     context.translate(x, y);
     context.rotate(bitlib.random.float(-0.75, -0.25));
