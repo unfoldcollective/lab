@@ -41,7 +41,7 @@ document.getElementById("scale").value         = scale;
 function set_scale(value) { scale = parseFloat(value); }
 
 document.getElementById("speed").min           = 0.0;
-document.getElementById("speed").max           = 0.2;
+document.getElementById("speed").max           = 0.1;
 document.getElementById("speed").step          = 0.01;
 document.getElementById("speed").value         = speed;
 function set_speed(value) { speed = parseFloat(value); }
@@ -58,10 +58,10 @@ document.getElementById("count").step          = 1.0;
 document.getElementById("count").value         = count;
 function set_count(value) { count = parseFloat(value); }
 
-document.getElementById("hue_shift").min             = 0.0;
-document.getElementById("hue_shift").max             = 100.0;
-document.getElementById("hue_shift").step            = 1.0;
-document.getElementById("hue_shift").value           = hue_shift;
+document.getElementById("hue_shift").min       = 0.0;
+document.getElementById("hue_shift").max       = 100.0;
+document.getElementById("hue_shift").step      = 1.0;
+document.getElementById("hue_shift").value     = hue_shift;
 function set_hue_shift(value) { hue_shift = parseFloat(value); }
 
 document.getElementById("hue").min             = 0.0;
@@ -99,13 +99,6 @@ document.getElementById("bg_lightness").max    = 1.0;
 document.getElementById("bg_lightness").step   = 0.01;
 document.getElementById("bg_lightness").value  = bg_lightness;
 function set_bg_lightness(value) { bg_lightness = parseFloat(value); }
-
-
-    // .addBoolean("transparent bg", bg_transparent, function(value) {
-    //     bg_transparent = value;
-    // })
-
-
 
 bitlib.anim(update).start();
 
